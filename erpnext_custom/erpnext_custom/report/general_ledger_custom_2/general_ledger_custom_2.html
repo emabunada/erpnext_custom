@@ -1,0 +1,28 @@
+{%= __("Statement of Account") %}
+{% if (filters.party_name) { %} {%= filters.party_name %} {% } else if (filters.party && filters.party.length) { %} {%= filters.party %} {% } else if (filters.account) { %} {%= filters.account %} {% } %} 
+{% if (filters.tax_id) { %} {%= __("Tax Id: ")%} {%= filters.tax_id %} {% } %} 
+{%= frappe.datetime.str_to_user(filters.from_date) %} {%= __("to") %} {%= frappe.datetime.str_to_user(filters.to_date) %} 
+
+{% for(var i=0, l=data.length; i {% if(data[i].posting_date) { %} {% } else { %} {% } %} {% } %}
+{%= __("Date") %}
+{%= __("Reference") %}
+{%= __("Remarks") %}
+{%= __("Debit") %}
+{%= __("Credit") %}
+{%= __("Balance (Dr - Cr)") %}
+{%= frappe.datetime.str_to_user(data[i].posting_date) %}
+{%= data[i].voucher_type %} 
+{%= data[i].voucher_no %}
+{% if(!(filters.party || filters.account)) { %} {%= data[i].party || data[i].account %} 
+{% } %} 
+{%= __("Remarks") %}: {%= data[i].remarks %} {% if(data[i].bill_no) { %} 
+{%= __("Supplier Invoice No") %}: {%= data[i].bill_no %} {% } %} 
+{%= format_currency(data[i].debit, filters.presentation_currency) %}
+{%= format_currency(data[i].credit, filters.presentation_currency) %}
+
+
+{%= frappe.format(data[i].account, {fieldtype: "Link"}) || " " %}
+{%= data[i].account && format_currency(data[i].debit, filters.presentation_currency) %} 
+{%= data[i].account && format_currency(data[i].credit, filters.presentation_currency) %} 
+{%= format_currency(data[i].balance, filters.presentation_currency) %} 
+Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}

@@ -8,3 +8,5 @@ def validate_attendance_hours(doc, method):
     if not doc.check_out or not doc.check_in:
         doc.hours = 0
         doc.status = "Absent"
+        
+
