@@ -632,7 +632,7 @@ def get_columns(filters):
 				"width": 100,
 			},
 			{"label": _("Supplier Invoice No"), "fieldname": "bill_no", "fieldtype": "Data", "width": 100},
-		
+
 			{"label": _("Remarks"), "fieldname": "remarks", "width": 400},
 		]
 	)

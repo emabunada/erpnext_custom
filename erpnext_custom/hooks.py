@@ -32,6 +32,11 @@ app_license = "MIT"
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+    "Quotation": "public/js/quotation.js",
+    "Purchase Order": "public/js/purchase_order.js",
+    "Sales Invoice": "public/js/sales_invoice.js",
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -105,12 +110,13 @@ app_license = "MIT"
 
 
 doc_events = {
-	"Attendance": {
-		"validate": "erpnext_custom.custom_event.attendence_custom_event.validate_attendance_hours",
-	},
-	"Sales Invoice": {
-		"validate": "erpnext_custom.custom_event.sales_invoice_custom.validate_note",
-	},
+    "Attendance": {
+        "validate": "erpnext_custom.custom_event.attendence_custom_event.validate_attendance_hours",
+    },
+    "Sales Invoice": {
+        "validate": ["erpnext_custom.custom_event.sales_invoice_custom.validate_note",
+                     "erpnext_custom.custom_event.sales_invoice_custom.validate_pos_payments", ]
+    },
 }
 
 # Scheduled Tasks
@@ -162,24 +168,24 @@ doc_events = {
 # --------------------
 
 user_data_fields = [
-	{
-		"doctype": "{doctype_1}",
-		"filter_by": "{filter_by}",
-		"redact_fields": ["{field_1}", "{field_2}"],
-		"partial": 1,
-	},
-	{
-		"doctype": "{doctype_2}",
-		"filter_by": "{filter_by}",
-		"partial": 1,
-	},
-	{
-		"doctype": "{doctype_3}",
-		"strict": False,
-	},
-	{
-		"doctype": "{doctype_4}"
-	}
+    {
+        "doctype": "{doctype_1}",
+        "filter_by": "{filter_by}",
+        "redact_fields": ["{field_1}", "{field_2}"],
+        "partial": 1,
+    },
+    {
+        "doctype": "{doctype_2}",
+        "filter_by": "{filter_by}",
+        "partial": 1,
+    },
+    {
+        "doctype": "{doctype_3}",
+        "strict": False,
+    },
+    {
+        "doctype": "{doctype_4}"
+    }
 ]
 
 # Authentication and authorization
@@ -188,4 +194,3 @@ user_data_fields = [
 # auth_hooks = [
 #	"erpnext_custom.auth.validate"
 # ]
-
