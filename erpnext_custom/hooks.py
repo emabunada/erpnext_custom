@@ -34,6 +34,7 @@ app_license = "MIT"
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 doctype_js = {
     "Quotation": "public/js/quotation.js",
+    "Item": "overides/js/item.js",
     "Purchase Order": "public/js/purchase_order.js",
     "Sales Invoice": "public/js/sales_invoice.js",
 }
@@ -93,7 +94,8 @@ doctype_js = {
 # Override standard doctype classes
 
 override_doctype_class = {
-	"Sales Order": "erpnext_custom.overides.py.sales_order.CustomSalesOrder"
+    "Sales Order": "erpnext_custom.overides.py.sales_order.CustomSalesOrder",
+    "Purchase Order": "erpnext_custom.overides.py.purchase_order.CustomPurchaseOrder",
 }
 
 # Document Events
@@ -116,6 +118,9 @@ doc_events = {
     "Sales Invoice": {
         "validate": ["erpnext_custom.custom_event.sales_invoice_custom.validate_note",
                      "erpnext_custom.custom_event.sales_invoice_custom.validate_pos_payments", ]
+    },
+    "Material Request": {
+        "submit": "erpnext_custom.custom_event.material_request_custom_event.create_stock_entry",
     },
 }
 
